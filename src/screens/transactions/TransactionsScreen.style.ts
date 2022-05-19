@@ -1,13 +1,9 @@
 import { ExtendedTheme } from "@react-navigation/native";
-import { ViewStyle, StyleSheet } from "react-native";
-
-interface Style {
-  container: ViewStyle;
-}
+import { StyleSheet } from "react-native";
 
 export default (theme: ExtendedTheme) => {
   const { colors } = theme;
-  return StyleSheet.create<Style>({
+  return StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: colors.background,

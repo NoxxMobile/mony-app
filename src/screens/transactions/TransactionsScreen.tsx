@@ -4,12 +4,12 @@ import { useTheme } from "@react-navigation/native";
 /**
  * ? Local Imports
  */
-import createStyles from "./SearchScreen.style";
+import createStyles from "./TransactionsScreen.style";
 import Text from "@shared-components/text-wrapper/TextWrapper";
 
-interface SearchScreenProps {}
+interface TransactionsScreenProps {}
 
-const SearchScreen: React.FC<SearchScreenProps> = () => {
+const TransactionsScreen: React.FC<TransactionsScreenProps> = () => {
   const theme = useTheme();
   const { colors } = theme;
   const styles = useMemo(() => createStyles(theme), [theme]);
@@ -17,10 +17,10 @@ const SearchScreen: React.FC<SearchScreenProps> = () => {
   return (
     <View style={styles.container}>
       <Text h1 color={colors.text}>
-        Search
+        Transactions
       </Text>
     </View>
   );
 };
 
-export default SearchScreen;
+export default TransactionsScreen;

@@ -4,12 +4,12 @@ import { useTheme } from "@react-navigation/native";
 /**
  * ? Local Imports
  */
-import createStyles from "./NotificationScreen.style";
+import createStyles from "./InsightScreen.style";
 import Text from "@shared-components/text-wrapper/TextWrapper";
 
-interface ProfileScreenProps {}
+interface InsightScreenProps {}
 
-const ProfileScreen: React.FC<ProfileScreenProps> = () => {
+const InsightScreen: React.FC<InsightScreenProps> = () => {
   const theme = useTheme();
   const { colors } = theme;
   const styles = useMemo(() => createStyles(theme), [theme]);
@@ -17,10 +17,10 @@ const ProfileScreen: React.FC<ProfileScreenProps> = () => {
   return (
     <View style={styles.container}>
       <Text h1 color={colors.text}>
-        Notification
+        Insight
       </Text>
     </View>
   );
 };
 
-export default ProfileScreen;
+export default InsightScreen;
