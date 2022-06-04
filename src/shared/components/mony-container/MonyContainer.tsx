@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { View, StyleProp, ViewStyle } from "react-native";
 import { useTheme } from "@react-navigation/native";
-import Icon from "react-native-dynamic-vector-icons";
+import Icon, { IconType } from "react-native-dynamic-vector-icons";
 /**
  * ? Local Imports
  */
@@ -17,7 +17,7 @@ interface MonyCardProps {
   mony: number;
   type: string;
   iconName?: string;
-  iconType?: string;
+  iconType?: IconType;
 }
 
 const MonyContainer: React.FC<MonyCardProps> = ({
