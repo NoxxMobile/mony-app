@@ -9,9 +9,9 @@ import Text from "@shared-components/text-wrapper/TextWrapper";
  */
 import createStyles from "./AccountsCard.style";
 import fonts from "@fonts";
-import MonyContainer from "@shared-components/mony-container/MonyContainer";
-import { formatCurrency } from "@utils";
 import Button from "@shared-components/button/Button";
+import Balance from "@shared-components/balance/Balance";
+import MonyContainer from "@shared-components/mony-container/MonyContainer";
 
 type CustomStyleProp = StyleProp<ViewStyle> | Array<StyleProp<ViewStyle>>;
 
@@ -53,18 +53,7 @@ const AccountsCard: React.FC<AccountsCardProps> = ({
     </View>
   );
 
-  const renderBalance = () => (
-    <View style={styles.balance}>
-      <Text h3 color={colors.offBlack} fontFamily={fonts.montserrat.medium}>
-        Balance
-      </Text>
-      <View style={styles.balanceValueText}>
-        <Text h1 bold color={colors.white}>
-          {formatCurrency("en-US", "USD", 3).format(753637.96)}
-        </Text>
-      </View>
-    </View>
-  );
+  const renderBalance = () => <Balance balance={753637.96} />;
 
   const renderIncomeExpenses = () => (
     <View style={styles.incomeExpenses}>

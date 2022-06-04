@@ -9,10 +9,13 @@ export const generateRandomNumber = (min: number, max: number) => {
 export const formatCurrency = (
   locales = "en-US",
   currency = "USD",
-  maximumFractionDigits = 1,
+  maximumFractionDigits = 3,
 ) =>
   new Intl.NumberFormat(locales, {
     currency,
     style: "currency",
     maximumFractionDigits,
   });
+
+export const calculateProgress = (expenses: number, income: number) =>
+  1 - (expenses * 100) / income / 100;

@@ -1,23 +1,22 @@
 import { ExtendedTheme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { ScreenHeight, ScreenWidth } from "@freakycoder/react-native-helpers";
-import fonts from "@fonts";
 
 export default (theme: ExtendedTheme) => {
   const { colors } = theme;
   return StyleSheet.create({
     container: {
-      padding: 32,
-      width: ScreenWidth * 0.7,
-      height: ScreenHeight * 0.55,
+      padding: 24,
       borderRadius: 24,
-      backgroundColor: colors.black,
+      width: ScreenWidth * 0.8,
+      height: ScreenHeight * 0.235,
+      backgroundColor: colors.white,
     },
     circle: {
       width: 10,
       height: 10,
       borderRadius: 10,
-      backgroundColor: colors.white,
+      backgroundColor: colors.offBlack,
     },
     header: {
       width: "100%",
@@ -29,28 +28,17 @@ export default (theme: ExtendedTheme) => {
       flexDirection: "row",
       alignItems: "center",
     },
-    threeDot: {
-      width: 40,
-      height: 40,
-      borderRadius: 50,
-      alignItems: "center",
-      justifyContent: "center",
-    },
-    accountNameText: {
+    headerText: {
       marginLeft: 8,
     },
-    incomeExpenses: {
+    headerDateText: {
+      marginTop: 8,
+    },
+    netWorth: {
+      marginTop: 16,
+    },
+    overview: {
       marginTop: 32,
-      width: "100%",
-    },
-    expenses: {
-      marginTop: 24,
-    },
-    addTransactionButton: {
-      marginTop: 32,
-    },
-    addTransactionButtonTextStyle: {
-      fontFamily: fonts.montserrat.bold,
     },
   });
 };

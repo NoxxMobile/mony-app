@@ -40,5 +40,14 @@ export default (theme: ExtendedTheme) => {
     listContainer: {
       marginTop: 8,
     },
+    accountsCard: {
+      marginLeft: 24,
+    },
+    activePeriodCard: {
+      marginLeft: 24,
+    },
+    mynetWorthCard: {
+      marginTop: 16,
+    },
   });
 };

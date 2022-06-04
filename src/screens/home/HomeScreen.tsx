@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 /**
@@ -11,6 +11,8 @@ import createStyles from "./HomeScreen.style";
  */
 import UserService from "./services/userService";
 import AccountsCard from "@shared-components/accounts-card/AccountsCard";
+import ActivePeriodCard from "@shared-components/active-period/ActivePeriodCard";
+import MyNetWorthCard from "@shared-components/my-net-worth-card/MyNetWorthCard";
 
 interface HomeScreenProps {}
 
@@ -36,9 +38,23 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
   /* -------------------------------------------------------------------------- */
 
   const renderMainList = () => (
-    <View style={styles.listContainer}>
-      <AccountsCard onPress={() => {}} onThreeDotPress={() => {}} />
-    </View>
+    <ScrollView
+      pagingEnabled
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      style={styles.listContainer}
+      contentInset={{ left: 24, right: 24 }}
+    >
+      <AccountsCard
+        style={styles.accountsCard}
+        onPress={() => {}}
+        onThreeDotPress={() => {}}
+      />
+      <View style={styles.activePeriodCard}>
+        <ActivePeriodCard income={75637.35} expenses={31653.11} />
+        <MyNetWorthCard style={styles.mynetWorthCard} />
+      </View>
+    </ScrollView>
   );
 
   const renderContent = () => (
