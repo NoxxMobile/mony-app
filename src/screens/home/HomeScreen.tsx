@@ -6,18 +6,24 @@ import { SafeAreaView } from "react-native-safe-area-context";
  * ? Local Imports
  */
 import createStyles from "./HomeScreen.style";
+import UserService from "./services/userService";
+import { transactions } from "../../utils/mocks/transactions";
 /**
  * ? Shared Imports
  */
-import UserService from "./services/userService";
 import AccountsCard from "@shared-components/accounts-card/AccountsCard";
 import ActivePeriodCard from "@shared-components/active-period/ActivePeriodCard";
 import MyNetWorthCard from "@shared-components/my-net-worth-card/MyNetWorthCard";
+import TransactionCard from "@shared-components/transaction-card/TransactionCard";
+import Text from "@shared-components/text-wrapper/TextWrapper";
+import fonts from "@fonts";
+import RNBounceable from "@freakycoder/react-native-bounceable";
 
 interface HomeScreenProps {}
 
 const HomeScreen: React.FC<HomeScreenProps> = () => {
   const theme = useTheme();
+  const { colors } = theme;
   const styles = useMemo(() => createStyles(theme), [theme]);
 
   React.useEffect(() => {
@@ -37,13 +43,13 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
   /*                               Render Methods                               */
   /* -------------------------------------------------------------------------- */
 
-  const renderMainList = () => (
+  const renderScrollView = () => (
     <ScrollView
       pagingEnabled
       horizontal
       showsHorizontalScrollIndicator={false}
+      contentInset={styles.scContentInset}
       style={styles.listContainer}
-      contentInset={{ left: 24, right: 24 }}
     >
       <AccountsCard
         style={styles.accountsCard}
@@ -51,14 +57,47 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
         onThreeDotPress={() => {}}
       />
       <View style={styles.activePeriodCard}>
-        <ActivePeriodCard income={75637.35} expenses={31653.11} />
-        <MyNetWorthCard style={styles.mynetWorthCard} />
+        <ActivePeriodCard
+          income={75637.35}
+          expenses={31653.11}
+          onPress={() => {}}
+        />
+        <MyNetWorthCard style={styles.mynetWorthCard} onPress={() => {}} />
       </View>
     </ScrollView>
   );
 
+  const renderTransactions = () => {
+    return (
+      <View style={styles.transactionsSection}>
+        <View style={styles.transactionsHeader}>
+          <Text h4 fontFamily={fonts.montserrat.medium} color={colors.offGray}>
+            Transactions
+          </Text>
+          <RNBounceable onPress={() => {}}>
+            <Text>See All</Text>
+          </RNBounceable>
+        </View>
+        <View style={styles.transactions}>
+          {transactions.map((transaction, index) => {
+            return (
+              <TransactionCard
+                style={styles.transactionCard}
+                key={index}
+                data={transaction}
+              />
+            );
+          })}
+        </View>
+      </View>
+    );
+  };
+
   const renderContent = () => (
-    <View style={styles.contentContainer}>{renderMainList()}</View>
+    <ScrollView style={styles.contentContainer}>
+      {renderScrollView()}
+      {renderTransactions()}
+    </ScrollView>
   );
 
   return (

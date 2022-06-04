@@ -8,7 +8,7 @@ export default (theme: ExtendedTheme) => {
   return StyleSheet.create({
     container: {
       padding: 32,
-      width: ScreenWidth * 0.7,
+      width: ScreenWidth * 0.75,
       height: ScreenHeight * 0.55,
       borderRadius: 24,
       backgroundColor: colors.black,

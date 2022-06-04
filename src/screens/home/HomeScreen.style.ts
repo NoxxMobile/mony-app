@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { ExtendedTheme } from "@react-navigation/native";
-import { ScreenWidth } from "@freakycoder/react-native-helpers";
+import { ScreenHeight, ScreenWidth } from "@freakycoder/react-native-helpers";
 
 export default (theme: ExtendedTheme) => {
   const { colors } = theme;
@@ -34,19 +34,41 @@ export default (theme: ExtendedTheme) => {
       fontWeight: "700",
     },
     contentContainer: {
-      flex: 1,
-      marginTop: 32,
+      marginTop: 16,
     },
     listContainer: {
+      flexGrow: 0,
       marginTop: 8,
+      minHeight: ScreenHeight * 0.55,
     },
     accountsCard: {
-      marginLeft: 24,
+      marginLeft: 8,
     },
     activePeriodCard: {
       marginLeft: 24,
     },
     mynetWorthCard: {
+      marginTop: 16,
+    },
+    scContentInset: {
+      left: 24,
+      right: 24,
+    },
+    transactions: {
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    transactionsSection: {
+      marginTop: 16,
+    },
+    transactionsHeader: {
+      marginLeft: 24,
+      marginRight: 24,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+    },
+    transactionCard: {
       marginTop: 16,
     },
   });

@@ -6,6 +6,7 @@ export const palette = {
   background: "#F3F5F9",
   white: "#fff",
   offBlack: "#49455F",
+  offGray: "#C9D0DE",
   black: "#171620",
   button: "#252234",
   shadow: "#757575",
