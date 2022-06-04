@@ -5,7 +5,7 @@ import RNText, { IRNTextProps } from "@freakycoder/react-native-custom-text";
  */
 import fonts from "@fonts";
 
-interface ITextWrapperProps extends IRNTextProps {
+export interface ITextWrapperProps extends IRNTextProps {
   color?: string;
   fontFamily?: string;
   children?: React.ReactNode;

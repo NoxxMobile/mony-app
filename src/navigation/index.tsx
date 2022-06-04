@@ -106,9 +106,7 @@ const Navigation = () => {
           name="Rocket"
           component={TransactionsScreen}
           options={{
-            tabBarButton: (props) => (
-              <TabBarMainButton bgColor="#F6F7EB" {...props} />
-            ),
+            tabBarButton: () => <TabBarMainButton onPress={() => {}} />,
           }}
         />
         <Tab.Screen name={SCREENS.INSIGHT} component={insightScreen} />

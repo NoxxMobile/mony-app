@@ -1,6 +1,7 @@
 import { ExtendedTheme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { ScreenHeight, ScreenWidth } from "@freakycoder/react-native-helpers";
+import fonts from "@fonts";
 
 export default (theme: ExtendedTheme) => {
   const { colors } = theme;
@@ -8,7 +9,7 @@ export default (theme: ExtendedTheme) => {
     container: {
       padding: 32,
       width: ScreenWidth * 0.7,
-      height: ScreenHeight * 0.5,
+      height: ScreenHeight * 0.55,
       borderRadius: 24,
       backgroundColor: colors.black,
     },
@@ -39,7 +40,7 @@ export default (theme: ExtendedTheme) => {
       marginLeft: 8,
     },
     balance: {
-      marginTop: 64,
+      marginTop: 48,
     },
     balanceValueText: {
       marginTop: 16,
@@ -50,6 +51,12 @@ export default (theme: ExtendedTheme) => {
     },
     expenses: {
       marginTop: 24,
+    },
+    addTransactionButton: {
+      marginTop: 32,
+    },
+    addTransactionButtonTextStyle: {
+      fontFamily: fonts.montserrat.bold,
     },
   });
 };

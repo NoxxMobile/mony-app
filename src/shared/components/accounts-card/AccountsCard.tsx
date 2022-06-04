@@ -11,6 +11,7 @@ import createStyles from "./AccountsCard.style";
 import fonts from "@fonts";
 import MonyContainer from "@shared-components/mony-container/MonyContainer";
 import { formatCurrency } from "@utils";
+import Button from "@shared-components/button/Button";
 
 type CustomStyleProp = StyleProp<ViewStyle> | Array<StyleProp<ViewStyle>>;
 
@@ -81,6 +82,13 @@ const AccountsCard: React.FC<AccountsCardProps> = ({
       {renderHeader()}
       {renderBalance()}
       {renderIncomeExpenses()}
+      <Button
+        text="Add Transaction"
+        style={styles.addTransactionButton}
+        fontFamily={fonts.montserrat.bold}
+        large
+        onPress={() => {}}
+      />
     </RNBounceable>
   );
 };
