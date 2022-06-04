@@ -1,23 +1,18 @@
 import React, { useMemo } from "react";
-import { View, FlatList, Image } from "react-native";
+import { View, Image } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import Icon from "react-native-dynamic-vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
-import * as NavigationService from "react-navigation-helpers";
 import RNBounceable from "@freakycoder/react-native-bounceable";
 /**
  * ? Local Imports
  */
 import createStyles from "./HomeScreen.style";
-import MockData from "./mock/MockData";
-import CardItem from "./components/card-item/CardItem";
 /**
  * ? Shared Imports
  */
-import { SCREENS } from "@shared-constants";
-import Text from "@shared-components/text-wrapper/TextWrapper";
-import fonts from "@fonts";
 import UserService from "./services/userService";
+import AccountsCard from "@shared-components/accounts-card/AccountsCard";
 
 const profileURI =
   // eslint-disable-next-line max-len
@@ -43,10 +38,6 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
     UserService.setUserData(mockUserData);
   }, []);
 
-  const handleItemPress = () => {
-    NavigationService.push(SCREENS.DETAIL);
-  };
-
   /* -------------------------------------------------------------------------- */
   /*                               Render Methods                               */
   /* -------------------------------------------------------------------------- */
@@ -68,36 +59,14 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
     </View>
   );
 
-  const renderList = () => (
+  const renderMainList = () => (
     <View style={styles.listContainer}>
-      <FlatList
-        data={MockData}
-        renderItem={({ item }) => (
-          <CardItem data={item} onPress={handleItemPress} />
-        )}
-      />
+      <AccountsCard onPress={() => {}} onThreeDotPress={() => {}} />
     </View>
-  );
-
-  const renderWelcome = () => (
-    <>
-      <Text h1 bold color={colors.text}>
-        Hello Kuray
-      </Text>
-      <Text
-        fontFamily={fonts.montserrat.lightItalic}
-        color={colors.placeholder}
-      >
-        Welcome Back
-      </Text>
-    </>
   );
 
   const renderContent = () => (
-    <View style={styles.contentContainer}>
-      {renderWelcome()}
-      {renderList()}
-    </View>
+    <View style={styles.contentContainer}>{renderMainList()}</View>
   );
 
   return (

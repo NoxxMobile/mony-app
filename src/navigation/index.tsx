@@ -20,6 +20,7 @@ import insightScreen from "@screens/insight/InsightScreen";
 import HomeIMG from "@assets/app/bottom-bar/house.png";
 import TransactionIMG from "@assets/app/bottom-bar/transaction2.png";
 import UserIMG from "@assets/app/bottom-bar/account.png";
+import TabBarMainButton from "@shared-components/tab-bar-main-button/TabBarMainButton";
 
 // ? If you want to use stack or tab or both
 const Tab = createBottomTabNavigator();
@@ -91,6 +92,7 @@ const Navigation = () => {
           tabBarActiveTintColor: palette.primary,
           tabBarInactiveTintColor: "gray",
           tabBarStyle: {
+            borderTopWidth: 0,
             backgroundColor: isDarkMode ? palette.black : palette.white,
           },
         })}
@@ -99,6 +101,15 @@ const Navigation = () => {
         <Tab.Screen
           name={SCREENS.TRANSACTIONS}
           component={TransactionsScreen}
+        />
+        <Tab.Screen
+          name="Rocket"
+          component={TransactionsScreen}
+          options={{
+            tabBarButton: (props) => (
+              <TabBarMainButton bgColor="#F6F7EB" {...props} />
+            ),
+          }}
         />
         <Tab.Screen name={SCREENS.INSIGHT} component={insightScreen} />
         <Tab.Screen name={SCREENS.PROFILE} component={ProfileScreen} />
