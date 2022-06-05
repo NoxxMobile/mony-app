@@ -1,7 +1,9 @@
 import React, { useState, useMemo } from "react";
 import { View, StyleProp, ViewStyle } from "react-native";
+import moment from "moment";
 import { useTheme } from "@react-navigation/native";
 import Icon from "react-native-dynamic-vector-icons";
+import DatePicker from "react-native-neat-date-picker";
 import * as NavigationService from "react-navigation-helpers";
 import SegmentedControl from "react-native-segmented-control-2";
 import RNBounceable from "@freakycoder/react-native-bounceable";
@@ -10,6 +12,8 @@ import RNBounceable from "@freakycoder/react-native-bounceable";
  */
 import createStyles from "./AddTransaction.style";
 import Text from "@shared-components/text-wrapper/TextWrapper";
+import Button from "@shared-components/button/Button";
+import { ScreenWidth } from "@freakycoder/react-native-helpers";
 
 type CustomStyleProp = StyleProp<ViewStyle> | Array<StyleProp<ViewStyle>>;
 
@@ -22,6 +26,30 @@ const AddTransaction: React.FC<AddTransactionProps> = ({ style }) => {
   const { colors } = theme;
   const styles = useMemo(() => createStyles(theme), [theme]);
   const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0);
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  // const [transaction, setTransaction] = useState<number>();
+
+  const openDatePicker = () => {
+    setShowDatePicker(true);
+  };
+
+  const onCancel = () => {
+    // You should close the modal in here
+    setShowDatePicker(false);
+  };
+
+  const onConfirm = (output: any) => {
+    // You should close the modal in here
+    setShowDatePicker(false);
+
+    setSelectedDate(output.date);
+
+    // The parameter 'output' is an object containing date and dateString (for single mode).
+    // For range mode, the output contains startDate, startDateString, endDate, and EndDateString
+    console.log(output.date);
+    console.log(output.dateString);
+  };
 
   const handleCancelPress = () => {
     NavigationService.pop();
@@ -63,7 +91,11 @@ const AddTransaction: React.FC<AddTransactionProps> = ({ style }) => {
         renderTab("circle-with-plus", "Income", 0),
         renderTab("circle-with-minus", "Expenses", 1),
       ]}
-      style={{ backgroundColor: "#e8e8e8", right: 8, marginTop: 16 }}
+      style={{
+        backgroundColor: "#e8e8e8",
+        right: 8,
+        marginTop: 16,
+      }}
       activeTabColor={selectedTabIndex === 0 ? "#10943c" : "#941010"}
       // activeTextColor="#fff"
       onChange={(index: number) => setSelectedTabIndex(index)}
@@ -74,7 +106,24 @@ const AddTransaction: React.FC<AddTransactionProps> = ({ style }) => {
     <View style={[styles.container, style]}>
       {renderHeader()}
       {renderSegmentedControl()}
-      <Text color={colors.offBlack}>Hello</Text>
+      <Button
+        style={{
+          marginTop: 16,
+          borderRadius: 8,
+          alignSelf: "center",
+          width: ScreenWidth * 0.35,
+          backgroundColor: "#e8e8e8",
+        }}
+        color={colors.offBlack}
+        text={moment(selectedDate).format("D MMM YYYY")}
+        onPress={openDatePicker}
+      />
+      <DatePicker
+        isVisible={showDatePicker}
+        mode={"single"}
+        onCancel={onCancel}
+        onConfirm={onConfirm}
+      />
     </View>
   );
 };
