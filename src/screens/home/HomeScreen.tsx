@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import { ScrollView, View } from "react-native";
 import { useTheme } from "@react-navigation/native";
+import RNBounceable from "@freakycoder/react-native-bounceable";
 /**
  * ? Local Imports
  */
@@ -10,13 +11,12 @@ import { transactions } from "../../utils/mocks/transactions";
 /**
  * ? Shared Imports
  */
+import fonts from "@fonts";
+import Text from "@shared-components/text-wrapper/TextWrapper";
 import AccountsCard from "@shared-components/accounts-card/AccountsCard";
 import ActivePeriodCard from "@shared-components/active-period/ActivePeriodCard";
 import MyNetWorthCard from "@shared-components/my-net-worth-card/MyNetWorthCard";
 import TransactionCard from "@shared-components/transaction-card/TransactionCard";
-import Text from "@shared-components/text-wrapper/TextWrapper";
-import fonts from "@fonts";
-import RNBounceable from "@freakycoder/react-native-bounceable";
 
 interface HomeScreenProps {}
 

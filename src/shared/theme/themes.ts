@@ -10,6 +10,7 @@ export const palette = {
   black: "#171620",
   button: "#252234",
   shadow: "#757575",
+  blue: "#0E7AFE",
   text: "#30363b",
   borderColor: "#d0d7de",
   borderColorDark: "#333942",
