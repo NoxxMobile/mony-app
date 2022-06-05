@@ -1,6 +1,10 @@
 import { StyleSheet } from "react-native";
 import { ExtendedTheme } from "@react-navigation/native";
-import { ScreenHeight, ScreenWidth } from "@freakycoder/react-native-helpers";
+import {
+  getStatusBarHeight,
+  ScreenHeight,
+  ScreenWidth,
+} from "@freakycoder/react-native-helpers";
 
 export default (theme: ExtendedTheme) => {
   const { colors } = theme;
@@ -8,6 +12,7 @@ export default (theme: ExtendedTheme) => {
     container: {
       flex: 1,
       alignItems: "center",
+      paddingTop: getStatusBarHeight(),
       backgroundColor: colors.background,
     },
     titleTextStyle: {
@@ -59,7 +64,9 @@ export default (theme: ExtendedTheme) => {
       justifyContent: "center",
     },
     transactionsSection: {
+      flex: 1,
       marginTop: 16,
+      paddingBottom: 24,
     },
     transactionsHeader: {
       marginLeft: 24,

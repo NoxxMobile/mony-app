@@ -2,7 +2,11 @@ import React from "react";
 import { StyleSheet, useColorScheme } from "react-native";
 import FastImage from "react-native-fast-image";
 import Icon from "react-native-dynamic-vector-icons";
-import { createStackNavigator } from "@react-navigation/stack";
+import {
+  createStackNavigator,
+  TransitionPresets,
+} from "@react-navigation/stack";
+import * as NavigationService from "react-navigation-helpers";
 import { NavigationContainer } from "@react-navigation/native";
 import { isReadyRef, navigationRef } from "react-navigation-helpers";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -21,6 +25,8 @@ import HomeIMG from "@assets/app/bottom-bar/house.png";
 import TransactionIMG from "@assets/app/bottom-bar/transaction2.png";
 import UserIMG from "@assets/app/bottom-bar/account.png";
 import TabBarMainButton from "@shared-components/tab-bar-main-button/TabBarMainButton";
+import { isAndroid } from "@freakycoder/react-native-helpers";
+import AddTransaction from "@screens/add-transaction/AddTransaction";
 
 // ? If you want to use stack or tab or both
 const Tab = createBottomTabNavigator();
@@ -59,7 +65,6 @@ const Navigation = () => {
         break;
       }
       case SCREENS.TRANSACTIONS: {
-        // icon = <Icon name="list" type="Entypo" size={size} color={color} />;
         icon = (
           <FastImage
             source={TransactionIMG}
@@ -106,7 +111,13 @@ const Navigation = () => {
           name="Rocket"
           component={TransactionsScreen}
           options={{
-            tabBarButton: () => <TabBarMainButton onPress={() => {}} />,
+            tabBarButton: () => (
+              <TabBarMainButton
+                onPress={() => {
+                  NavigationService.push(SCREENS.ADD_TRANSACTION);
+                }}
+              />
+            ),
           }}
         />
         <Tab.Screen name={SCREENS.INSIGHT} component={insightScreen} />
@@ -123,8 +134,25 @@ const Navigation = () => {
       }}
       theme={isDarkMode ? DarkTheme : LightTheme}
     >
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Navigator
+        screenOptions={{
+          gestureEnabled: true,
+          headerShown: false,
+          ...(isAndroid && TransitionPresets.ModalPresentationIOS),
+        }}
+      >
         <Stack.Screen name={SCREENS.HOME} component={renderTabNavigation} />
+        <Stack.Group
+          screenOptions={{
+            headerShown: false,
+            presentation: "modal",
+          }}
+        >
+          <Stack.Screen
+            name={SCREENS.ADD_TRANSACTION}
+            component={AddTransaction}
+          />
+        </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>
   );

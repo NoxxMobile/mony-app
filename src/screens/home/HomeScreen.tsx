@@ -1,7 +1,6 @@
 import React, { useMemo } from "react";
 import { ScrollView, View } from "react-native";
 import { useTheme } from "@react-navigation/native";
-import { SafeAreaView } from "react-native-safe-area-context";
 /**
  * ? Local Imports
  */
@@ -100,9 +99,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
     </ScrollView>
   );
 
-  return (
-    <SafeAreaView style={styles.container}>{renderContent()}</SafeAreaView>
-  );
+  return <View style={styles.container}>{renderContent()}</View>;
 };
 
 export default HomeScreen;

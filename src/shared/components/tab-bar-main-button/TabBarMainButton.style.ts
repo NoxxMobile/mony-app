@@ -5,7 +5,6 @@ export default (theme: ExtendedTheme) => {
   const { colors } = theme;
   return StyleSheet.create({
     container: {
-      position: "relative",
       width: 75,
       alignItems: "center",
     },
