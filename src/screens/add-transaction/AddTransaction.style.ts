@@ -1,6 +1,9 @@
 import { ExtendedTheme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
-import { ScreenWidth } from "@freakycoder/react-native-helpers";
+import {
+  getStatusBarHeight,
+  ScreenWidth,
+} from "@freakycoder/react-native-helpers";
 import fonts from "@fonts";
 
 export default (theme: ExtendedTheme) => {
@@ -28,8 +31,8 @@ export default (theme: ExtendedTheme) => {
       backgroundColor: "#e8e8e8",
     },
     transactionKeyboard: {
-      flex: 1,
-      bottom: 64,
+      bottom: getStatusBarHeight(),
+      position: "absolute",
       justifyContent: "flex-end",
     },
     transactionTextInput: {
