@@ -22,6 +22,7 @@
     "react-native-fast-image": "^8.5.11",
     "react-native-gesture-handler": "^2.4.2",
     "react-native-localization": "^2.3.1",
+    "react-native-modalize": "^2.0.13",
     "react-native-modern-keyboard": "^0.1.2",
     "react-native-neat-date-picker": "^1.2.4",
     "react-native-progress": "^5.0.0",

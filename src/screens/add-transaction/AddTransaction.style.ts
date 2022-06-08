@@ -27,6 +27,7 @@ export default (theme: ExtendedTheme) => {
       marginTop: 16,
       borderRadius: 8,
       alignSelf: "center",
+      marginLeft: 3,
       width: ScreenWidth * 0.35,
       backgroundColor: "#e8e8e8",
     },
@@ -40,6 +41,26 @@ export default (theme: ExtendedTheme) => {
       fontSize: 48,
       textAlign: "right",
       fontFamily: fonts.montserrat.bold,
+    },
+    dateAndCategory: {
+      width: "100%",
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-evenly",
+    },
+    categoryButton: {
+      marginTop: 16,
+      borderRadius: 8,
+      alignSelf: "center",
+      flexDirection: "row",
+      alignItems: "center",
+      width: ScreenWidth * 0.5,
+      backgroundColor: "#e8e8e8",
+    },
+    categoryIcon: {
+      width: 30,
+      height: 30,
+      marginRight: 8,
     },
   });
 };

@@ -15,6 +15,7 @@ type CustomStyleProp = StyleProp<ViewStyle> | Array<StyleProp<ViewStyle>>;
 interface ButtonProps extends ITextWrapperProps {
   style?: CustomStyleProp;
   large?: boolean;
+  iconComponent?: any;
   text: string;
   onPress: () => void;
 }
@@ -22,6 +23,7 @@ interface ButtonProps extends ITextWrapperProps {
 const Button: React.FC<ButtonProps> = ({
   style,
   large,
+  iconComponent,
   text,
   onPress,
   ...rest
@@ -35,6 +37,7 @@ const Button: React.FC<ButtonProps> = ({
       style={[styles.container, large && styles.largeButton, style]}
       onPress={onPress}
     >
+      {!!iconComponent && iconComponent}
       <Text h3 color={colors.white} {...rest}>
         {text}
       </Text>

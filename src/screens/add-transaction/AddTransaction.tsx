@@ -1,6 +1,7 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useRef } from "react";
 import { View, StyleProp, ViewStyle, TextInput } from "react-native";
 import moment from "moment";
+import FastImage from "react-native-fast-image";
 import { useTheme } from "@react-navigation/native";
 import Icon from "react-native-dynamic-vector-icons";
 import DatePicker from "react-native-neat-date-picker";
@@ -14,6 +15,9 @@ import RNBounceable from "@freakycoder/react-native-bounceable";
 import createStyles from "./AddTransaction.style";
 import Button from "@shared-components/button/Button";
 import Text from "@shared-components/text-wrapper/TextWrapper";
+import fonts from "@fonts";
+import CategorySelectionModal from "@shared-components/category-selection-modal/CategorySelectionModal";
+import { Modalize } from "react-native-modalize";
 
 type CustomStyleProp = StyleProp<ViewStyle> | Array<StyleProp<ViewStyle>>;
 
@@ -29,31 +33,30 @@ const AddTransaction: React.FC<AddTransactionProps> = ({ style }) => {
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [transaction, setTransaction] = useState<string>();
+  const categoryModalRef = useRef<Modalize>(null);
 
-  const openDatePicker = () => {
+  const handleDatePickerPress = () => {
     setShowDatePicker(true);
   };
 
   const onCancel = () => {
-    // You should close the modal in here
     setShowDatePicker(false);
   };
 
   const onConfirm = (output: any) => {
-    // You should close the modal in here
     setShowDatePicker(false);
-
     setSelectedDate(output.date);
+  };
 
-    // The parameter 'output' is an object containing date and dateString (for single mode).
-    // For range mode, the output contains startDate, startDateString, endDate, and EndDateString
-    console.log(output.date);
-    console.log(output.dateString);
+  const handleCategoryPress = () => {
+    categoryModalRef.current?.open();
   };
 
   const handleCancelPress = () => {
     NavigationService.pop();
   };
+
+  const handleSavePress = () => {};
 
   const renderHeader = () => (
     <View style={styles.header}>
@@ -62,9 +65,11 @@ const AddTransaction: React.FC<AddTransactionProps> = ({ style }) => {
           Cancel
         </Text>
       </RNBounceable>
-      <Text h4 bold color={colors.blue}>
-        Save
-      </Text>
+      <RNBounceable onPress={handleSavePress}>
+        <Text h4 bold color={colors.blue}>
+          Save
+        </Text>
+      </RNBounceable>
     </View>
   );
 
@@ -108,7 +113,7 @@ const AddTransaction: React.FC<AddTransactionProps> = ({ style }) => {
       style={styles.datePickerButton}
       color={colors.offBlack}
       text={moment(selectedDate).format("D MMM YYYY")}
-      onPress={openDatePicker}
+      onPress={handleDatePickerPress}
     />
   );
 
@@ -141,13 +146,42 @@ const AddTransaction: React.FC<AddTransactionProps> = ({ style }) => {
     </View>
   );
 
+  const renderCategoryButton = () => (
+    <Button
+      text="General"
+      style={styles.categoryButton}
+      color={colors.offBlack}
+      iconComponent={
+        <FastImage
+          resizeMode="contain"
+          source={require("@assets/icons/category/money-bag-gold.png")}
+          style={styles.categoryIcon}
+        />
+      }
+      fontFamily={fonts.montserrat.medium}
+      onPress={handleCategoryPress}
+    />
+  );
+
+  const renderDateAndCategory = () => (
+    <View style={styles.dateAndCategory}>
+      {renderDatePickerButton()}
+      {renderCategoryButton()}
+    </View>
+  );
+
+  const renderCategorySelectionModal = () => (
+    <CategorySelectionModal modalRef={categoryModalRef} />
+  );
+
   return (
     <View style={[styles.container, style]}>
       {renderHeader()}
       {renderSegmentedControl()}
-      {renderDatePickerButton()}
+      {renderDateAndCategory()}
       {renderTransactionKeyboard()}
       {renderDatePicker()}
+      {renderCategorySelectionModal()}
     </View>
   );
 };
