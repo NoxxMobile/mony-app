@@ -1,9 +1,10 @@
 import React, { useState, useMemo } from "react";
-import { View, StyleProp, ViewStyle } from "react-native";
+import { View, StyleProp, ViewStyle, TextInput } from "react-native";
 import moment from "moment";
 import { useTheme } from "@react-navigation/native";
 import Icon from "react-native-dynamic-vector-icons";
 import DatePicker from "react-native-neat-date-picker";
+import ModernKeyboard from "react-native-modern-keyboard";
 import * as NavigationService from "react-navigation-helpers";
 import SegmentedControl from "react-native-segmented-control-2";
 import RNBounceable from "@freakycoder/react-native-bounceable";
@@ -11,9 +12,8 @@ import RNBounceable from "@freakycoder/react-native-bounceable";
  * ? Local Imports
  */
 import createStyles from "./AddTransaction.style";
-import Text from "@shared-components/text-wrapper/TextWrapper";
 import Button from "@shared-components/button/Button";
-import { ScreenWidth } from "@freakycoder/react-native-helpers";
+import Text from "@shared-components/text-wrapper/TextWrapper";
 
 type CustomStyleProp = StyleProp<ViewStyle> | Array<StyleProp<ViewStyle>>;
 
@@ -28,7 +28,7 @@ const AddTransaction: React.FC<AddTransactionProps> = ({ style }) => {
   const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0);
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  // const [transaction, setTransaction] = useState<number>();
+  const [transaction, setTransaction] = useState<string>();
 
   const openDatePicker = () => {
     setShowDatePicker(true);
@@ -92,9 +92,10 @@ const AddTransaction: React.FC<AddTransactionProps> = ({ style }) => {
         renderTab("circle-with-minus", "Expenses", 1),
       ]}
       style={{
+        alignSelf: "center",
+        alignItems: "center",
+        justifyContent: "center",
         backgroundColor: "#e8e8e8",
-        right: 8,
-        marginTop: 16,
       }}
       activeTabColor={selectedTabIndex === 0 ? "#10943c" : "#941010"}
       // activeTextColor="#fff"
@@ -102,28 +103,51 @@ const AddTransaction: React.FC<AddTransactionProps> = ({ style }) => {
     />
   );
 
+  const renderDatePickerButton = () => (
+    <Button
+      style={styles.datePickerButton}
+      color={colors.offBlack}
+      text={moment(selectedDate).format("D MMM YYYY")}
+      onPress={openDatePicker}
+    />
+  );
+
+  const renderDatePicker = () => (
+    <DatePicker
+      isVisible={showDatePicker}
+      mode={"single"}
+      onCancel={onCancel}
+      onConfirm={onConfirm}
+    />
+  );
+
+  const renderTransactionKeyboard = () => (
+    <View style={styles.transactionKeyboard}>
+      <TextInput
+        style={[
+          styles.transactionTextInput,
+          {
+            color: transaction ? colors.offBlack : colors.offGray,
+          },
+        ]}
+      >
+        {transaction || "USD"}
+      </TextInput>
+      <ModernKeyboard
+        onInputChange={(value: string) => {
+          setTransaction(value);
+        }}
+      />
+    </View>
+  );
+
   return (
     <View style={[styles.container, style]}>
       {renderHeader()}
       {renderSegmentedControl()}
-      <Button
-        style={{
-          marginTop: 16,
-          borderRadius: 8,
-          alignSelf: "center",
-          width: ScreenWidth * 0.35,
-          backgroundColor: "#e8e8e8",
-        }}
-        color={colors.offBlack}
-        text={moment(selectedDate).format("D MMM YYYY")}
-        onPress={openDatePicker}
-      />
-      <DatePicker
-        isVisible={showDatePicker}
-        mode={"single"}
-        onCancel={onCancel}
-        onConfirm={onConfirm}
-      />
+      {renderDatePickerButton()}
+      {renderTransactionKeyboard()}
+      {renderDatePicker()}
     </View>
   );
 };
