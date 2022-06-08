@@ -8,6 +8,7 @@ import createStyles from "./CategorySelectionModal.style";
 import Text from "@shared-components/text-wrapper/TextWrapper";
 import { Modalize } from "react-native-modalize";
 import { ScreenHeight } from "@freakycoder/react-native-helpers";
+import CategoryButton from "@shared-components/category-button/CategoryButton";
 
 type CustomStyleProp = StyleProp<ViewStyle> | Array<StyleProp<ViewStyle>>;
 
@@ -33,6 +34,11 @@ const CategorySelectionModal: React.FC<CategorySelectionModalProps> = ({
         <Text h1 bold>
           Categories
         </Text>
+        <CategoryButton
+          source={require("@assets/icons/category/money-bag-gold.png")}
+          category="Entertainment"
+          onPress={() => {}}
+        />
       </View>
     </Modalize>
   );
