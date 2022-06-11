@@ -5,8 +5,8 @@ export default (theme: ExtendedTheme) => {
   const { colors } = theme;
   return StyleSheet.create({
     container: {
-      width: 125,
-      height: 125,
+      width: 100,
+      height: 100,
       borderRadius: 24,
       alignItems: "center",
       justifyContent: "center",

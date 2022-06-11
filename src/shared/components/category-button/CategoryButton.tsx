@@ -36,7 +36,11 @@ const CategoryButton: React.FC<CategoryButtonProps> = ({
   return (
     <RNBounceable style={[styles.container, style]} onPress={onPress}>
       <FastImage source={source} style={[styles.imageStyle, imageStyle]} />
-      <Text fontFamily={fonts.montserrat.medium} style={styles.textStyle}>
+      <Text
+        center
+        fontFamily={fonts.montserrat.medium}
+        style={styles.textStyle}
+      >
         {category}
       </Text>
     </RNBounceable>
