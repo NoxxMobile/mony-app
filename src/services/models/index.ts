@@ -1,3 +1,5 @@
+import { Source } from "react-native-fast-image";
+
 export interface ICardItem {
   name: string;
   description: string;
@@ -14,4 +16,9 @@ export interface IUser {
   socialType: string;
   creationDate?: number;
   photo?: string | null;
+}
+
+export interface ICategory {
+  name: string;
+  icon: Source;
 }

@@ -18,6 +18,8 @@ import Text from "@shared-components/text-wrapper/TextWrapper";
 import fonts from "@fonts";
 import CategorySelectionModal from "@shared-components/category-selection-modal/CategorySelectionModal";
 import { Modalize } from "react-native-modalize";
+import { ICategory } from "@services/models";
+import { EXPENSE_CATEGORIES } from "@shared-constants";
 
 type CustomStyleProp = StyleProp<ViewStyle> | Array<StyleProp<ViewStyle>>;
 
@@ -34,6 +36,7 @@ const AddTransaction: React.FC<AddTransactionProps> = ({ style }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [transaction, setTransaction] = useState<string>();
   const categoryModalRef = useRef<Modalize>(null);
+  const [category, setCategory] = useState<ICategory>(EXPENSE_CATEGORIES[0]);
 
   const handleDatePickerPress = () => {
     setShowDatePicker(true);
@@ -73,17 +76,17 @@ const AddTransaction: React.FC<AddTransactionProps> = ({ style }) => {
     </View>
   );
 
-  const renderTab = (icon: string, text: string, index: number) => {
-    const color = selectedTabIndex === index ? colors.white : colors.offBlack;
+  const renderTab = (
+    icon: string,
+    text: string,
+    color: string,
+    index: number,
+  ) => {
+    const selectedColor = selectedTabIndex === index ? color : colors.offBlack;
     return (
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-        }}
-      >
-        <Icon name={icon} type="Entypo" color={color} />
-        <Text bold color={color} style={{ marginLeft: 16 }}>
+      <View style={styles.tab}>
+        <Icon name={icon} type="Entypo" color={selectedColor} />
+        <Text bold color={selectedColor} style={styles.tabTextStyle}>
           {text}
         </Text>
       </View>
@@ -93,17 +96,10 @@ const AddTransaction: React.FC<AddTransactionProps> = ({ style }) => {
   const renderSegmentedControl = () => (
     <SegmentedControl
       tabs={[
-        renderTab("circle-with-plus", "Income", 0),
-        renderTab("circle-with-minus", "Expenses", 1),
+        renderTab("circle-with-minus", "Expenses", "#941010", 0),
+        renderTab("circle-with-plus", "Income", "#10943c", 1),
       ]}
-      style={{
-        alignSelf: "center",
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "#e8e8e8",
-      }}
-      activeTabColor={selectedTabIndex === 0 ? "#10943c" : "#941010"}
-      // activeTextColor="#fff"
+      style={styles.segmentedControlStyle}
       onChange={(index: number) => setSelectedTabIndex(index)}
     />
   );
@@ -148,13 +144,13 @@ const AddTransaction: React.FC<AddTransactionProps> = ({ style }) => {
 
   const renderCategoryButton = () => (
     <Button
-      text="General"
+      text={category.name}
       style={styles.categoryButton}
       color={colors.offBlack}
       iconComponent={
         <FastImage
           resizeMode="contain"
-          source={require("@assets/icons/category/money-bag-gold.png")}
+          source={category.icon}
           style={styles.categoryIcon}
         />
       }
@@ -171,7 +167,13 @@ const AddTransaction: React.FC<AddTransactionProps> = ({ style }) => {
   );
 
   const renderCategorySelectionModal = () => (
-    <CategorySelectionModal modalRef={categoryModalRef} />
+    <CategorySelectionModal
+      modalRef={categoryModalRef}
+      onSelect={(selectedCategory: ICategory) => {
+        setCategory(selectedCategory);
+        categoryModalRef.current?.close();
+      }}
+    />
   );
 
   return (

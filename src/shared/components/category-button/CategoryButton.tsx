@@ -38,6 +38,8 @@ const CategoryButton: React.FC<CategoryButtonProps> = ({
       <FastImage source={source} style={[styles.imageStyle, imageStyle]} />
       <Text
         center
+        numberOfLines={1}
+        adjustsFontSizeToFit
         fontFamily={fonts.montserrat.medium}
         style={styles.textStyle}
       >

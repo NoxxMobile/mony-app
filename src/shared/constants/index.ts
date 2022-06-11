@@ -62,7 +62,7 @@ export const EXPENSE_CATEGORIES = [
     icon: require("@assets/icons/category/sports-o.png"),
   },
   {
-    name: "Entertain",
+    name: "Entertainment",
     icon: require("@assets/icons/category/entertainment-o.png"),
   },
   {

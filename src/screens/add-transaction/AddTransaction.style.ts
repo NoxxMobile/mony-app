@@ -19,9 +19,18 @@ export default (theme: ExtendedTheme) => {
       alignItems: "center",
       justifyContent: "space-between",
     },
+    tab: {
+      flexDirection: "row",
+      alignItems: "center",
+    },
+    tabTextStyle: {
+      marginLeft: 16,
+    },
     segmentedControlStyle: {
-      height: 35,
-      width: ScreenWidth * 0.5,
+      alignSelf: "center",
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: "#e8e8e8",
     },
     datePickerButton: {
       marginTop: 16,
