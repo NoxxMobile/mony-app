@@ -6,9 +6,17 @@ export default (theme: ExtendedTheme) => {
   return StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: colors.background,
-      alignItems: "center",
-      justifyContent: "center",
+      marginHorizontal: 16,
+    },
+    item: {
+      marginVertical: 8,
+    },
+    header: {
+      fontSize: 32,
+      backgroundColor: colors.white,
+    },
+    title: {
+      fontSize: 24,
     },
   });
 };

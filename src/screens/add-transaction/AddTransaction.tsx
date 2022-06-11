@@ -96,8 +96,8 @@ const AddTransaction: React.FC<AddTransactionProps> = ({ style }) => {
   const renderSegmentedControl = () => (
     <SegmentedControl
       tabs={[
-        renderTab("circle-with-minus", "Expenses", "#941010", 0),
-        renderTab("circle-with-plus", "Income", "#10943c", 1),
+        renderTab("circle-with-minus", "Expenses", colors.expensesRed, 0),
+        renderTab("circle-with-plus", "Income", colors.incomeGreen, 1),
       ]}
       style={styles.segmentedControlStyle}
       onChange={(index: number) => setSelectedTabIndex(index)}

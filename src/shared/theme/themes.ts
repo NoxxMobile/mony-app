@@ -28,6 +28,8 @@ export const palette = {
   dynamicBackground: "#fff",
   transparent: "transparent",
   calpyse: "#2b7488",
+  expensesRed: "#941010",
+  incomeGreen: "#10943c",
 };
 
 export const LightTheme: ExtendedTheme = {
